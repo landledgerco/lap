@@ -85,7 +85,7 @@ Links to relevant standards, research, or prior art.
 
 The Steering Committee is responsible for reviewing LIPs, maintaining the specification, and managing version releases.
 
-**Founding Steward:** Land Ledger
+**Founding Steward:** Land Ledger LLC
 
 Additional seats on the Steering Committee are available to organizations that implement LAP and commit to operating a publicly accessible verification endpoint for at least 12 months. To request a seat, open an issue with the subject line: "Steering Committee Seat Request: [Organization Name]".
 
