@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/landledgerco/lap/schemas/land-record-v1.1.json",
-  "title": "LAP Land Record Verification Response",
-  "description": "JSON Schema for the public verification response from a LAP-conformant implementing platform. Published at GET /api/schema/land-record on any conformant platform.",
+  "$id": "https://github.com/landledgerco/LAND/schemas/land-record-v1.1.json",
+  "title": "LAND Protocol Land Record Verification Response",
+  "description": "JSON Schema for the public verification response from a LAND Protocol-conformant implementing platform. Published at GET /api/schema/land-record on any conformant platform.",
   "version": "1.1.0",
   "type": "object",
   "required": ["landId", "rootHash", "anchors", "sections", "recordCounts"],
@@ -22,7 +22,7 @@
     },
     "schemaVersion": {
       "type": ["string", "null"],
-      "description": "Version of the LAP hashing schema used to construct this root hash (e.g., '1.0', '1.1')."
+      "description": "Version of the LAND Protocol hashing schema used to construct this root hash (e.g., '1.0', '1.1')."
     },
     "anchoredAt": {
       "type": ["string", "null"],
@@ -131,7 +131,7 @@
     },
     "recordCounts": {
       "type": "object",
-      "description": "Anonymized counts of recorded legal instruments. All fields MUST be present for LAP Anchored conformance; totalLiens MUST NOT be omitted even if zero.",
+      "description": "Anonymized counts of recorded legal instruments. All fields MUST be present for LAND Anchored conformance; totalLiens MUST NOT be omitted even if zero.",
       "required": ["totalLiens"],
       "properties": {
         "activeLiens": {
@@ -289,3 +289,4 @@
     }
   ]
 }
+
