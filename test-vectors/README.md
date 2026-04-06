@@ -1,12 +1,12 @@
-# LAP Hash Algorithm Test Vectors
+# LAND Protocol Hash Algorithm Test Vectors
 
-This directory contains canonical test vectors for the LAP v1.0 hash construction algorithm. Any implementation that produces these exact outputs from these exact inputs is correctly implementing the LAP canonicalization and hashing procedure.
+This directory contains canonical test vectors for the LAND Protocol v1.0 hash construction algorithm. Any implementation that produces these exact outputs from these exact inputs is correctly implementing the LAND Protocol canonicalization and hashing procedure.
 
 ---
 
 ## Algorithm Summary
 
-LAP uses **SHA-256** as the hash function and **sorted-key JSON serialization** as the canonicalization function.
+LAND Protocol uses **SHA-256** as the hash function and **sorted-key JSON serialization** as the canonicalization function.
 
 **Canonical serialization rule:** Use `JSON.stringify` with a function replacer that recursively sorts all object keys alphabetically. All native `JSON.stringify` semantics are preserved (undefined omission, Date.toJSON(), array null coercion). No whitespace is added.
 
@@ -256,4 +256,4 @@ If you add a test vector via a LIP (see CONTRIBUTING.md), include:
 3. The expected hash output (lowercase hex).
 4. A verification script snippet in at least JavaScript and Python.
 
-All test vectors must be independently reproducible using only a SHA-256 implementation and a JSON serializer. No LAP-specific libraries should be required to verify a test vector.
+All test vectors must be independently reproducible using only a SHA-256 implementation and a JSON serializer. No LAND Protocol-specific libraries should be required to verify a test vector.
