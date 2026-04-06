@@ -1,10 +1,10 @@
-# Land Asset Protocol — Specification v1.0
+# LAND Protocol — Specification v1.0
 
 **Status:** Published  
 **Published:** April 2026  
 **Steward:** Land Ledger (Founding Steward)  
 **License:** CC0 1.0 Universal (public domain)  
-**Repository:** https://github.com/landledgerco/lap
+**Repository:** https://github.com/landledgerco/LAND
 
 ---
 
@@ -37,17 +37,17 @@
 
 ## 1. Introduction
 
-The Land Asset Protocol (LAP) is an open standard for recording, hashing, and anchoring land asset data onchain. It defines a five-section data schema, a deterministic SHA-256 hash construction algorithm, a public verification API shape, and three progressive compliance tiers that land tokenization platforms can implement and disclose.
+The LAND Protocol (Ledger-Anchored Notarized Deeds) is an open standard for recording, hashing, and anchoring land asset data onchain. It defines a five-section data schema, a deterministic SHA-256 hash construction algorithm, a public verification API shape, and three progressive compliance tiers that land tokenization platforms can implement and disclose.
 
-LAP was designed around a single premise: a land record should be cryptographically provable without trusting any single company. Anyone with a root hash and access to a public blockchain explorer can independently confirm that a record has not changed since it was anchored, without creating an account or relying on a proprietary API.
+LAND Protocol was designed around a single premise: a land record should be cryptographically provable without trusting any single company. Anyone with a root hash and access to a public blockchain explorer can independently confirm that a record has not changed since it was anchored, without creating an account or relying on a proprietary API.
 
-Land Ledger published LAP v1.0 in April 2026 and operates as the reference implementation. The specification is released under CC0 (public domain). Any platform may implement it, fork it, or build tooling around it without restriction.
+Land Ledger published LAND v1.0 in April 2026 and operates as the reference implementation. The specification is released under CC0 (public domain). Any platform may implement it, fork it, or build tooling around it without restriction.
 
 ---
 
 ## 2. Scope
 
-LAP v1.0 is scoped to US agricultural and rural land. The five-section schema is designed for farmland, timberland, and similar parcels regardless of the legal entity structure used to hold title (SPV, LLC, trust, corporation, or individual).
+LAND v1.0 is scoped to US agricultural and rural land. The five-section schema is designed for farmland, timberland, and similar parcels regardless of the legal entity structure used to hold title (SPV, LLC, trust, corporation, or individual).
 
 Future versions may extend to urban, commercial, or international land. The standard is designed to grow alongside the network of implementers, data providers, and institutions who adopt it.
 
@@ -73,13 +73,13 @@ Each data section carries one of three status values:
 | `CAPTURED` | Data has been entered and committed. The section hash is computed and stored. |
 | `ATTESTED` | Data has been independently verified by a licensed third party (appraiser, surveyor, title company, or government source) and the attestation has been recorded. |
 
-For a record to qualify as LAP Anchored, all five core sections MUST reach CAPTURED or ATTESTED status.
+For a record to qualify as LAND Anchored, all five core sections MUST reach CAPTURED or ATTESTED status.
 
 ---
 
 ## 5. Five Core Data Sections
 
-Every LAP record is organized into five core sections. Each section is independently serialized and hashed with SHA-256. See [Section 6](#6-hash-construction-algorithm) for the exact canonicalization procedure.
+Every LAND Protocol record is organized into five core sections. Each section is independently serialized and hashed with SHA-256. See [Section 6](#6-hash-construction-algorithm) for the exact canonicalization procedure.
 
 ### 5.1 Identity
 
@@ -171,7 +171,7 @@ The Valuation section establishes the property's market value as determined by a
 
 ### 5.4 Legal
 
-The Legal section is where LAP establishes its most significant distinction from self-reported data systems. Lien disclosure is non-negotiable.
+The Legal section is where LAND Protocol establishes its most significant distinction from self-reported data systems. Lien disclosure is non-negotiable.
 
 **Required fields (MUST be present):**
 
@@ -257,7 +257,7 @@ The Compliance section captures regulatory and entity status.
 
 ### 5.6 Ownership (Optional, v1.1)
 
-The Ownership section records the legal identity of the holding entity and is optional in v1.0. The Land Ledger reference implementation includes it as schema v1.1. Platforms implementing the base five-section schema remain LAP-conformant.
+The Ownership section records the legal identity of the holding entity and is optional in v1.0. The Land Ledger reference implementation includes it as schema v1.1. Platforms implementing the base five-section schema remain LAND Protocol-conformant.
 
 When present, the Ownership section is included in the root hash computation. Its inclusion improves audit depth and supports direct onchain ownership verification.
 
@@ -293,7 +293,7 @@ When present, the Ownership section is included in the root hash computation. It
 
 ## 6. Hash Construction Algorithm
 
-The following algorithm MUST be followed exactly to produce a LAP-conformant root hash. Two implementations that follow this algorithm will always produce the same root hash from the same input data.
+The following algorithm MUST be followed exactly to produce a LAND Protocol-conformant root hash. Two implementations that follow this algorithm will always produce the same root hash from the same input data.
 
 ### Step 1: Read section data
 
@@ -425,29 +425,29 @@ Implementing platforms SHOULD use `file_bytes` hashing whenever the file content
 
 ## 9. Protocol Mechanics
 
-The following requirements apply to every LAP record regardless of tier.
+The following requirements apply to every LAND Protocol record regardless of tier.
 
 **MUST:**
-- Every LAP record MUST include a `rootHash` field containing the SHA-256 root hash of all section hashes, encoded as lowercase hexadecimal.
-- Every LAP record MUST include a `schemaVersion` field identifying the schema version used to construct the hash.
-- Every LAP record MUST be anchored on at least one supported blockchain: Base (L2) or Ethereum Mainnet.
-- Every LAP record MUST include an `anchoredAt` ISO 8601 timestamp recording when the root hash was first committed onchain.
+- Every LAND Protocol record MUST include a `rootHash` field containing the SHA-256 root hash of all section hashes, encoded as lowercase hexadecimal.
+- Every LAND Protocol record MUST include a `schemaVersion` field identifying the schema version used to construct the hash.
+- Every LAND Protocol record MUST be anchored on at least one supported blockchain: Base (L2) or Ethereum Mainnet.
+- Every LAND Protocol record MUST include an `anchoredAt` ISO 8601 timestamp recording when the root hash was first committed onchain.
 - The `recordCounts.totalLiens` field MUST be present and numeric. A value of zero is valid but the field must not be omitted. Omitting lien disclosure is non-conformant.
 
 **SHOULD:**
-- LAP records SHOULD be promoted to Ethereum Mainnet after all data is finalized, for maximum long-term permanence.
-- Implementing platforms SHOULD publish a `/.well-known/lap-protocol` discovery endpoint at their root domain identifying which LAP version they implement.
+- LAND Protocol records SHOULD be promoted to Ethereum Mainnet after all data is finalized, for maximum long-term permanence.
+- Implementing platforms SHOULD publish a `/.well-known/land-protocol` discovery endpoint at their root domain identifying which LAND Protocol version they implement.
 
 **MAY:**
-- LAP records MAY include a `frozen` boolean indicating the record is locked against further updates.
+- LAND Protocol records MAY include a `frozen` boolean indicating the record is locked against further updates.
 
 ---
 
 ## 10. Compliance Tiers
 
-A LAP record progresses through three tiers as more data is captured and verified. The tiers are additive: a record must satisfy all lower-tier requirements before qualifying for a higher tier.
+A LAND Protocol record progresses through three tiers as more data is captured and verified. The tiers are additive: a record must satisfy all lower-tier requirements before qualifying for a higher tier.
 
-### LAP Anchored
+### LAND Anchored
 
 **Requirements:**
 - All five core sections (Identity, Quality, Valuation, Legal, Compliance) at `CAPTURED` or `ATTESTED` status.
@@ -456,7 +456,7 @@ A LAP record progresses through three tiers as more data is captured and verifie
 - `anchoredAt` timestamp present.
 - `recordCounts.totalLiens` present (may be zero).
 
-### LAP Verified
+### LAND Verified
 
 **Requirements (all Anchored requirements, plus):**
 - At least one deed reference recorded with instrument number, recording date, county, and state.
@@ -464,7 +464,7 @@ A LAP record progresses through three tiers as more data is captured and verifie
 - All active liens disclosed (individual lien records, not just a count).
 - At least one independently verified third-party attestation (licensed appraiser, surveyor, or title company). See [Section 11](#11-attestation-envelope).
 
-### LAP Certified
+### LAND Certified
 
 **Requirements (all Verified requirements, plus):**
 - Government data bridge linked: county assessor APN, assessed value, and county record URL.
@@ -475,7 +475,7 @@ A LAP record progresses through three tiers as more data is captured and verifie
 
 ## 11. Attestation Envelope
 
-Third-party attestations are credentials from independent professionals recorded outside the five-section hash envelope but part of the public LAP record. They verify the accuracy of data that was self-reported or admin-entered.
+Third-party attestations are credentials from independent professionals recorded outside the five-section hash envelope but part of the public LAND Protocol record. They verify the accuracy of data that was self-reported or admin-entered.
 
 **Attestation types include:** appraiser, surveyor, title company, auditor, government.
 
@@ -497,7 +497,7 @@ Third-party attestations are credentials from independent professionals recorded
 
 **Normative requirements:**
 
-- Implementing platforms SHOULD include at least one third-party attestation for a record qualifying as LAP Verified.
+- Implementing platforms SHOULD include at least one third-party attestation for a record qualifying as LAND Verified.
 - Implementing platforms SHOULD store an EAS attestation UID (verified via `attest.sh`) when an onchain attestation is available.
 - Implementing platforms MAY surface attestation counts publicly; individual attester details are not required to be public.
 
@@ -505,7 +505,7 @@ Third-party attestations are credentials from independent professionals recorded
 
 ## 12. Verification API Shape
 
-Any LAP-conformant implementing platform MUST expose a public verification endpoint. The endpoint MUST be accessible without authentication.
+Any LAND Protocol-conformant implementing platform MUST expose a public verification endpoint. The endpoint MUST be accessible without authentication.
 
 **Endpoint:** `GET /api/verify/land/:id`
 
@@ -569,7 +569,7 @@ The machine-readable JSON Schema for this response is published at `/api/schema/
 
 ## 13. Discovery Endpoint
 
-Implementing platforms SHOULD publish a discovery document at `/.well-known/lap-protocol` at their root domain.
+Implementing platforms SHOULD publish a discovery document at `/.well-known/land-protocol` at their root domain.
 
 **Response shape:**
 
@@ -579,7 +579,7 @@ Implementing platforms SHOULD publish a discovery document at `/.well-known/lap-
   "version": "1.0",
   "implementer": "Land Ledger",
   "license": "CC0-1.0",
-  "specUrl": "https://github.com/landledgerco/lap",
+  "specUrl": "https://github.com/landledgerco/LAND",
   "schemaUrl": "https://landledger.co/api/schema/land-record",
   "verifyEndpoint": "https://landledger.co/api/verify/land/",
   "hashEndpoint": "https://landledger.co/api/verify/hash/"
@@ -590,9 +590,9 @@ Implementing platforms SHOULD publish a discovery document at `/.well-known/lap-
 
 ## 14. Governance and LIPs
 
-LAP is maintained as an open standard. Land Ledger serves as the Founding Steward and holds the initial editorial seat on the LAP Steering Committee.
+LAND Protocol is maintained as an open standard. Land Ledger serves as the Founding Steward and holds the initial editorial seat on the LAND Steering Committee.
 
-Changes to the protocol are proposed as **LAP Improvement Proposals (LIPs)**. See [CONTRIBUTING.md](../CONTRIBUTING.md) for the full LIP template and lifecycle.
+Changes to the protocol are proposed as **LAND Improvement Proposals (LIPs)**. See [CONTRIBUTING.md](../CONTRIBUTING.md) for the full LIP template and lifecycle.
 
 **LIP lifecycle stages:**
 
@@ -607,7 +607,7 @@ Changes to the protocol are proposed as **LAP Improvement Proposals (LIPs)**. Se
 
 ## 15. Versioning
 
-LAP follows semantic versioning principles:
+LAND Protocol follows semantic versioning principles:
 
 | Change type | Version bump | Examples |
 |---|---|---|
@@ -622,10 +622,11 @@ Backward compatibility: a record produced under schema v1.0 MUST still be verifi
 
 ## 16. License
 
-The Land Asset Protocol specification, schema, test vectors, and all normative text are released under the **Creative Commons CC0 1.0 Universal** license (public domain dedication).
+The LAND Protocol specification, schema, test vectors, and all normative text are released under the **Creative Commons CC0 1.0 Universal** license (public domain dedication).
 
 Anyone may implement, copy, distribute, adapt, or build on this specification without restriction, without attribution, and without seeking permission.
 
 The CC0 license does not apply to the Land Ledger platform software, brand, trademarks, or platform-specific implementations.
 
 Full license text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
